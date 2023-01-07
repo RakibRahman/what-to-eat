@@ -1,37 +1,37 @@
 .cardBox {
-  width: 277px;
-  height: 337px;
-  position: relative;
+    width: 277px;
+    height: 337px;
+    position: relative;
 }
 
 .cardBox img {
-  width: 100%;
-  object-fit: cover;
-  height: 250px;
-  border-radius: 10px 10px 0px 0px;
+    width: 100%;
+    object-fit: cover;
+    height: 250px;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .cardBox .vat {
-  position: absolute;
-  left: 0;
-  top: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .cardBox .productInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .cardBox .cartButton {
-  cursor: pointer;
-  width: 22px;
-  height: 20px;
-  background: #f3ba00;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: 0;
-  border: 0;
-  border-radius: 5px;
+    cursor: pointer;
+    width: 22px;
+    height: 20px;
+    background: #f3ba00;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
 }

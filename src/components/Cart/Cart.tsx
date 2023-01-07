@@ -1,97 +1,97 @@
-import React, { ChangeEvent } from "react";
 import {
-  CartProducts,
-  cartProducts,
-  removeFromCart,
-} from "../../slices/cartSlice";
-import { useSelector, useDispatch } from "react-redux";
-import "./Cart.css";
+    Button,
+    Flex,
+    Image,
+    Table,
+    TableContainer,
+    Tbody,
+    Td,
+    Th,
+    Thead,
+    Tr
+} from "@chakra-ui/react";
+import { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cartProducts, removeFromCart } from "../../slices/cartSlice";
+import { Payment } from "./Payment";
+import { Quantity } from "./Quantity";
 export const Cart = () => {
-  const cartItems = useSelector(cartProducts);
-  const dispatch = useDispatch();
-  const onQuantityChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number
-  ) => {
-    console.log(id, event.target.value);
-  };
-  return (
-    <>
-      <h1>Shopping Cart</h1>
+    const cartItems = useSelector(cartProducts);
+    const totalPrice = cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity!,
+        0
+    );
+    const dispatch = useDispatch();
 
-      <div className="shopping-cart">
-        <div className="column-labels">
-          <label className="product-image">Image</label>
-          <label className="product-details">Product</label>
-          <label className="product-price">Price</label>
-          <label className="product-quantity">Quantity</label>
-          <label className="product-removal">Remove</label>
-          <label className="product-line-price">Total</label>
-        </div>
+    return (
+        <>
+            <h1>Shopping Cart</h1>
 
-        {cartItems.map((cartItem) => (
-          <div className="product">
-            <div className="product-image">
-              <img src={cartItem.image} />
-            </div>
-            <div className="product-details">
-              <div className="product-title">{cartItem.name}</div>
-            </div>
-            <div className="product-price">{cartItem.price}</div>
-            <div className="product-quantity">
-              <input
-                type="number"
-                value={cartItem.quantity}
-                min={1}
-                onChange={(e) => onQuantityChange(e, cartItem.id)}
-              />
-            </div>
-            <div className="product-removal">
-              <button
-                className="remove-product"
-                onClick={() => {
-                  dispatch(removeFromCart(cartItem.id));
-                  console.log("first");
-                }}
-              >
-                Remove
-              </button>
-            </div>
-            <div className="product-line-price">
-              {cartItem.quantity! * cartItem.price}
-            </div>
-          </div>
-        ))}
-
-        <div className="totals">
-          <div className="totals-item">
-            <label>Subtotal</label>
-            <div className="totals-value" id="cart-subtotal">
-              71.97
-            </div>
-          </div>
-          <div className="totals-item">
-            <label>Tax (5%)</label>
-            <div className="totals-value" id="cart-tax">
-              3.60
-            </div>
-          </div>
-          <div className="totals-item">
-            <label>Shipping</label>
-            <div className="totals-value" id="cart-shipping">
-              15.00
-            </div>
-          </div>
-          <div className="totals-item totals-item-total">
-            <label>Grand Total</label>
-            <div className="totals-value" id="cart-total">
-              90.57
-            </div>
-          </div>
-        </div>
-
-        <button className="checkout">Checkout</button>
-      </div>
-    </>
-  );
+            <Flex flexDirection="column" className="shopping-cart">
+                <TableContainer>
+                    <Table variant="simple">
+                        <Thead>
+                            <Tr>
+                                <Th>Product</Th>
+                                <Th>Quantity</Th>
+                                <Th>Price</Th>
+                                <Th>Total</Th>
+                                <Th>Remove</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {cartItems.map((cartItem) => (
+                                <Tr key={cartItem.id}>
+                                    <Td>
+                                        <Flex alignItems="center" gap="5px">
+                                            <Image
+                                                src={
+                                                    cartItem.image ??
+                                                    "https://via.placeholder.com/150"
+                                                }
+                                                alt={cartItem.name}
+                                                w="80px"
+                                                h="80px"
+                                                objectFit="cover"
+                                                borderRadius={10}
+                                            />
+                                            {cartItem.name}
+                                        </Flex>
+                                    </Td>
+                                    <Td>
+                                        <Quantity
+                                            id={cartItem.id}
+                                            quantity={cartItem.quantity!}
+                                            quantity_available={
+                                                cartItem.quantity_available
+                                            }
+                                        />
+                                    </Td>
+                                    <Td>{cartItem.price}</Td>
+                                    <Td>
+                                        {cartItem.price * cartItem.quantity!}
+                                    </Td>
+                                    <Td>
+                                        <Button
+                                            bg="red"
+                                            size="sm"
+                                            color="white"
+                                            onClick={() => {
+                                                dispatch(
+                                                    removeFromCart(cartItem.id)
+                                                );
+                                            }}
+                                        >
+                                            Remove
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            ))}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+                <Payment totalPrice={totalPrice} />
+            </Flex>
+        </>
+    );
 };
