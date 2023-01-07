@@ -1,0 +1,11 @@
+.cardContainer {
+  height: 858px;
+  width: 1180px;
+  border-radius: 0px;
+  display: grid;
+  grid-template-columns: repeat(4, 277px);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  border: 1px solid #ccc;
+}
