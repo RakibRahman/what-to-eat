@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { quantityDecrement, quantityIncrement } from "../../slices/cartSlice";
+import { toast } from "react-hot-toast";
 
 export const Quantity = ({
     quantity,
@@ -19,9 +20,14 @@ export const Quantity = ({
             <Button
                 bg="green.500"
                 size="xs"
-                disabled={quantity_available === quantity}
+                sx={{
+                    opacity: quantity_available === quantity ? 0.5 : 1
+                }}
                 onClick={() => {
                     dispatch(quantityIncrement({ id }));
+                    if (quantity_available === quantity) {
+                        toast.error("The product  is out of the stock");
+                    }
                 }}
             >
                 <FaPlus color="#ffffff" />{" "}
@@ -32,9 +38,16 @@ export const Quantity = ({
             <Button
                 size="xs"
                 bg="red.500"
-                disabled={quantity === 1}
+                sx={{
+                    opacity: quantity === 1 ? 0.5 : 1
+                }}
                 onClick={() => {
                     dispatch(quantityDecrement({ id }));
+                    if (quantity === 1) {
+                        toast.error(
+                            "The product quantity  cant be less than 1"
+                        );
+                    }
                 }}
             >
                 <FaMinus color="#ffffff" />{" "}

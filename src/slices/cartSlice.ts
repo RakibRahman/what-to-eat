@@ -48,10 +48,8 @@ export const cartSlice = createSlice({
             const { id } = action.payload;
             const item = products.find((p) => p.id === id)!;
 
-            if (item.quantity! === item.quantity_available) {
-                toast.error("This item is out of stock");
-                return;
-            }
+            if (item.quantity! === item.quantity_available) return;
+
             if (item?.quantity! < item.quantity_available) {
                 item.quantity = item.quantity! + 1;
             }
@@ -61,10 +59,7 @@ export const cartSlice = createSlice({
             const { id } = action.payload;
             const item = products.find((p) => p.id === id)!;
 
-            if (item.quantity! === 1) {
-                toast.error("Quantity cant be zero");
-                return;
-            }
+            if (item.quantity! === 1) return;
 
             item.quantity = item.quantity! - 1;
         },
@@ -74,6 +69,9 @@ export const cartSlice = createSlice({
                 (item) => item.id !== action.payload
             );
             state.products = filterCartProducts;
+        },
+        clearCart: (state) => {
+            state.products.length = 0;
         }
     }
 });

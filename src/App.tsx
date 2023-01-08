@@ -1,21 +1,17 @@
+import { Box } from "@chakra-ui/react";
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
 import { useGetProducts } from "./apiOperations";
 import "./App.css";
-import { CardContainer } from "./components/CardContainer/CardContainer";
-import { Cart } from "./components/Cart/Cart";
-import { cartProducts } from "./slices/cartSlice";
+import { Header } from "./components/Header/Header";
 
 function App() {
     const { data, isError, isSuccess } = useGetProducts();
 
-    const cartProductsInfo = useSelector(cartProducts);
-    console.log(cartProductsInfo);
     return (
-        <div className="App">
-            <button>{cartProductsInfo.length}</button>
-            <CardContainer productList={data!} />
-            <Cart />
+        <Box>
+            {/* <CardContainer productList={data!} /> */}
+            {/* <Cart /> */}
+            <Header />
             <Toaster
                 position="bottom-center"
                 reverseOrder={false}
@@ -31,7 +27,7 @@ function App() {
                     }
                 }}
             />
-        </div>
+        </Box>
     );
 }
 
