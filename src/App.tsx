@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
+import { Blog } from "./components/Blog/Blog";
 import { CardContainer } from "./components/CardContainer/CardContainer";
 import { Header } from "./components/Header/Header";
 
@@ -12,6 +13,7 @@ function App() {
             {/* <Cart /> */}
             <Header />
             <CardContainer />
+            <Blog />
             <Toaster
                 position="bottom-center"
                 reverseOrder={false}
