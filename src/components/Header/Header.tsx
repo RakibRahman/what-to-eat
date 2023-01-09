@@ -5,7 +5,7 @@ import { Navbar } from "./Navbar";
 
 export const Header = () => {
     return (
-        <Box bg="#0C1712" px={[5, 15, 40]}>
+        <Box bg="#0C1712" px={[5, 20, 40]}>
             <Navbar />
             <Hero />
         </Box>

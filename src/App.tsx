@@ -1,17 +1,17 @@
 import { Box } from "@chakra-ui/react";
 import { Toaster } from "react-hot-toast";
-import { useGetProducts } from "./apiOperations";
 import "./App.css";
+import { CardContainer } from "./components/CardContainer/CardContainer";
 import { Header } from "./components/Header/Header";
 
 function App() {
-    const { data, isError, isSuccess } = useGetProducts();
 
     return (
         <Box>
-            {/* <CardContainer productList={data!} /> */}
+
             {/* <Cart /> */}
             <Header />
+            <CardContainer />
             <Toaster
                 position="bottom-center"
                 reverseOrder={false}

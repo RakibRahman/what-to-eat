@@ -20,7 +20,7 @@ export const Hero = () => {
             gap="50px"
             flexDirection={isSmallerThan990 ? "column" : "row"}
         >
-            <Stack flex={1} mt={isSmallerThan990 ? 20 : 40} gap="20px">
+            <Stack flex={1} mt={isSmallerThan990 ? 20 : 30} gap="20px">
                 <Heading
                     w={isSmallerThan990 ? "100%" : "80%"}
                     fontSize="70px"
